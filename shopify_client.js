@@ -9,10 +9,10 @@
 
 import Client from 'shopify-buy';
 
-// Initialize Client (PLACEHOLDERS)
+// Initialize Client
 const client = Client.buildClient({
-    domain: 'your-shop-name.myshopify.com',
-    storefrontAccessToken: 'your-public-access-token'
+    domain: 'ramen-zoo.myshopify.com',
+    storefrontAccessToken: 'b66c6329ce5df0f43419604189e80eaa'
 });
 
 export async function createCheckout(cartItems) {
