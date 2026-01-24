@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramen Zoo | The Art of the Slurp</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <!-- SEO & Social Sharing -->
+  <meta property="og:title" content="Ramen Zoo | Wear the Ritual" />
+  <meta property="og:description"
+    content="Premium streetwear inspired by the art of ramen. Ukiyo-e aesthetics x Modern grit." />
+  <meta property="og:image" content="https://ramenzoo.netlify.app/card_preview.jpg" />
+  <meta property="og:url" content="https://ramenzoo.com" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="./logo.png" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <img src="./logo.png" alt="Ramen Zoo Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">HOME</a></li>
+        <li><a href="#shop">SHOP</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+        <li>
+          <a href="#" id="cartIcon" class="cart-icon-link">
+            CART <span class="cart-badge">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>YOUR CART</h2>
+      <button class="cart-close">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <!-- Items will be injected here JS -->
+      <div class="empty-cart-message">Your noodle bowl is empty.</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>TOTAL</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="checkout-btn">CHECKOUT</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>RAMEN ZOO:<br>SAVOR THE STYLE</h1>
+        <p>Japanese Streetwear Served Fresh</p>
+        <a href="#" class="cta-button">EXPLORE THE COLLECTION</a>
+      </div>
+    </section>
+
+    <section class="brand-story" id="about">
+      <div class="story-content">
+        <h2>THE ART OF THE SLURP</h2>
+        <p>Ramen Zoo blends the disciplined serenity of Ukiyo-e with the raw joy of street food. We celebrate the
+          ritual, the mess, and the moment where nothing matters but the bowl in front of you.</p>
+        <p class="tagline">Wear the Ritual.</p>
+      </div>
+    </section>
+
+    <section class="mascot-menu" id="shop">
+      <h2>FRESH OFF THE MENU</h2>
+      <div class="grid">
+        <!-- Products will go here -->
+        <div class="product-card">
+          <img src="./product_tiger.jpg" alt="Tonkotsu Tiger Tee" class="card-image" />
+          <div class="card-details">
+            <h3>Tonkotsu Tiger</h3>
+            <p>$35.00</p>
+            <button class="add-to-cart">ADD TO CART</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="./product_monkey.jpg" alt="Miso Monkey Tee" class="card-image" />
+          <div class="card-details">
+            <h3>Miso Monkey</h3>
+            <p>$35.00</p>
+            <button class="add-to-cart">ADD TO CART</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="./product_sloth.jpg" alt="Shoyu Sloth Tee" class="card-image" />
+          <div class="card-details">
+            <h3>Shoyu Sloth</h3>
+            <p>$35.00</p>
+            <button class="add-to-cart">ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <section class="lookbook">
+      <h2>IN THE WILD</h2>
+      <div class="lookbook-grid">
+        <div class="lookbook-item item-1">
+          <img src="./lookbook_1.jpg" alt="Ramen Zoo Style 1" />
+        </div>
+        <div class="lookbook-item item-2">
+          <img src="./lookbook_2.jpg" alt="Ramen Zoo Style 2" />
+        </div>
+        <div class="lookbook-item item-3">
+          <img src="./lookbook_3.jpg" alt="Ramen Zoo Style 3" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>STAY HUNGRY</h4>
+        <p>Join the Slurp Squad for exclusive drops & 10% off.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email" />
+          <button type="submit">SUBSCRIBE</button>
+        </form>
+      </div>
+      <div class="footer-section">
+        <h4>MENU</h4>
+        <ul>
+          <li><a href="#">Shop All</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Ramen Zoo. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Quick View Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-container">
+      <button class="modal-close">&times;</button>
+      <div class="modal-content">
+        <div class="modal-image">
+          <img src="" alt="Product Image" id="modalImg" />
+        </div>
+        <div class="modal-details">
+          <h2 id="modalTitle">Product Title</h2>
+          <p class="modal-price" id="modalPrice">$35.00</p>
+          <p class="modal-desc">Premium heavyweight cotton tee featuring our signature "Noodle Zen" artwork. Puff print
+            details and vintage wash finish.</p>
+
+          <div class="size-selector">
+            <span>SIZE:</span>
+            <div class="sizes">
+              <button>S</button>
+              <button>M</button>
+              <button>L</button>
+              <button>XL</button>
+            </div>
+          </div>
+
+          <button class="add-to-cart modal-cta">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
