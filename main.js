@@ -36,16 +36,19 @@ const modal = document.getElementById('productModal');
 const modalImg = document.getElementById('modalImg');
 const modalTitle = document.getElementById('modalTitle');
 const closeModal = document.querySelector('.modal-close');
-const atcButtons = document.querySelectorAll('.add-to-cart');
-
 // Open Modal on "Add to Cart" click (simulating logic for now)
-atcButtons.forEach(btn => {
+// FIX: Only target buttons inside cards, not the modal button
+const productCardButtons = document.querySelectorAll('.product-card .add-to-cart');
+
+productCardButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         // Prevent default if form submit etc (none here)
         e.stopPropagation(); // Don't trigger card click if we had one
 
         // Find parent card data
         const card = btn.closest('.product-card');
+        if (!card) return; // Safety check
+
         const title = card.querySelector('h3').innerText;
         const imgSrc = card.querySelector('img').src;
 
@@ -61,6 +64,25 @@ atcButtons.forEach(btn => {
 // Close Logic
 closeModal.addEventListener('click', () => {
     modal.classList.remove('active');
+});
+
+// Checkout Button Logic
+document.querySelector('.checkout-btn').addEventListener('click', async () => {
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    const originalText = checkoutBtn.innerText;
+
+    checkoutBtn.innerText = "LOADING...";
+    checkoutBtn.disabled = true;
+
+    const url = await createCheckout(cart);
+
+    if (url) {
+        window.location.href = url;
+    } else {
+        checkoutBtn.innerText = originalText;
+        checkoutBtn.disabled = false;
+        alert("Failed to create checkout. Check console.");
+    }
 });
 
 modal.addEventListener('click', (e) => {
