@@ -60,7 +60,7 @@ const MOCK_PRODUCTS = [
         ]
     },
     {
-        id: 'gid://shopify/Product/3',
+        id: 'gid://shopify/Product/4',
         title: 'Shoyu Sloth',
         description: 'Slow cooked to perfection. Take your time with the Shoyu Sloth tee.',
         images: [{ src: '/product_sloth.jpg' }],
