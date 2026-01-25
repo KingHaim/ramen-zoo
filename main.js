@@ -1,6 +1,9 @@
-import { createCheckout } from './shopify_client.js';
+import { createCheckout, fetchAllProducts } from './shopify_client.js';
 
 console.log("Ramen Zoo App Initialized");
+
+// Global Products Cache
+let allProducts = [];
 
 // Header Scroll Effect
 const header = document.querySelector('.site-header');
@@ -12,6 +15,7 @@ window.addEventListener('scroll', () => {
         header.classList.remove('scrolled');
     }
 });
+
 // Scroll Animations using Intersection Observer
 const observerOptions = {
     threshold: 0.1,
@@ -27,62 +31,134 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.product-card').forEach(card => {
-    observer.observe(card);
-});
+
+// --- DYNAMIC PRODUCT LOADING ---
+async function initShop() {
+    try {
+        console.log("Fetching products...");
+        allProducts = await fetchAllProducts();
+        console.log("Products fetched:", allProducts);
+        renderProducts(allProducts);
+    } catch (error) {
+        console.error("Failed to fetch products:", error);
+        document.getElementById('productGrid').innerHTML = '<p>Error loading menu. Please check console.</p>';
+    }
+}
+
+function renderProducts(products) {
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = '';
+
+    products.forEach(product => {
+        const card = document.createElement('div');
+        card.classList.add('product-card');
+
+        // Use first image or placeholder
+        const imageSrc = product.images[0] ? product.images[0].src : './logo.png';
+        // Use min price
+        const price = product.variants[0].price.amount;
+        const currency = product.variants[0].price.currencyCode; // usually USD
+
+        card.innerHTML = `
+            <img src="${imageSrc}" alt="${product.title}" class="card-image" />
+            <div class="card-details">
+                <h3>${product.title}</h3>
+                <p>$${parseFloat(price).toFixed(2)}</p>
+                <button class="add-to-cart" data-id="${product.id}">ADD TO CART</button>
+            </div>
+        `;
+
+        grid.appendChild(card);
+        observer.observe(card);
+    });
+
+    attachCardListeners();
+}
+
 
 // Quick View Modal Logic
 const modal = document.getElementById('productModal');
 const modalImg = document.getElementById('modalImg');
 const modalTitle = document.getElementById('modalTitle');
+const modalPrice = document.getElementById('modalPrice');
+const modalDesc = document.querySelector('.modal-desc');
 const closeModal = document.querySelector('.modal-close');
-// Open Modal on "Add to Cart" click (simulating logic for now)
-// FIX: Only target buttons inside cards, not the modal button
-const productCardButtons = document.querySelectorAll('.product-card .add-to-cart');
+const sizeContainer = document.querySelector('.sizes');
 
-productCardButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        // Prevent default if form submit etc (none here)
-        e.stopPropagation(); // Don't trigger card click if we had one
+// Current Selected Product State
+let currentProduct = null;
+let currentVariant = null;
 
-        // Find parent card data
-        const card = btn.closest('.product-card');
-        if (!card) return; // Safety check
+function attachCardListeners() {
+    const productCardButtons = document.querySelectorAll('.product-card .add-to-cart');
 
-        const title = card.querySelector('h3').innerText;
-        const imgSrc = card.querySelector('img').src;
+    productCardButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
 
-        // Populate Modal
-        modalTitle.innerText = title;
-        modalImg.src = imgSrc;
+            const productId = btn.dataset.id;
+            currentProduct = allProducts.find(p => p.id === productId);
 
-        // Show Modal
-        modal.classList.add('active');
+            if (!currentProduct) return;
+
+            openModal(currentProduct);
+        });
     });
-});
+}
+
+function openModal(product) {
+    // Populate Modal
+    modalTitle.innerText = product.title;
+
+    const imageSrc = product.images[0] ? product.images[0].src : './logo.png';
+    modalImg.src = imageSrc;
+
+    const price = product.variants[0].price.amount;
+    modalPrice.innerText = '$' + parseFloat(price).toFixed(2);
+
+    modalDesc.innerText = product.description || "Fresh style served daily.";
+
+    // Render Sizes (Options)
+    // We assume the first option is 'Size' or similar. 
+    // Ideally we check product.options to see which one is Size.
+
+    // Find the "Size" option if it exists
+    const sizeOption = product.options.find(opt => opt.name === 'Size' || opt.name === 'Title');
+    // 'Title' happens if there's only 'Default Title'
+
+    sizeContainer.innerHTML = '';
+
+    if (sizeOption && sizeOption.name !== 'Title') {
+        sizeOption.values.forEach(value => { // value is just a string like "S", "M"
+            const btn = document.createElement('button');
+            btn.innerText = value;
+            btn.addEventListener('click', handleSizeSelect);
+            sizeContainer.appendChild(btn);
+        });
+
+        // Select first by default
+        if (sizeContainer.firstChild) {
+            sizeContainer.firstChild.classList.add('selected');
+        }
+    } else {
+        // No options or just Default Title
+        sizeContainer.innerHTML = '<span style="font-size:0.8rem; color: #666;">One Size / Standard</span>';
+    }
+
+    // Show Modal
+    modal.classList.add('active');
+}
+
+function handleSizeSelect(e) {
+    // Clear previous
+    document.querySelectorAll('.sizes button').forEach(b => b.classList.remove('selected'));
+    // Select clicked
+    e.target.classList.add('selected');
+}
 
 // Close Logic
 closeModal.addEventListener('click', () => {
     modal.classList.remove('active');
-});
-
-// Checkout Button Logic
-document.querySelector('.checkout-btn').addEventListener('click', async () => {
-    const checkoutBtn = document.querySelector('.checkout-btn');
-    const originalText = checkoutBtn.innerText;
-
-    checkoutBtn.innerText = "LOADING...";
-    checkoutBtn.disabled = true;
-
-    const url = await createCheckout(cart);
-
-    if (url) {
-        window.location.href = url;
-    } else {
-        checkoutBtn.innerText = originalText;
-        checkoutBtn.disabled = false;
-        alert("Failed to create checkout. Check console.");
-    }
 });
 
 modal.addEventListener('click', (e) => {
@@ -90,6 +166,7 @@ modal.addEventListener('click', (e) => {
         modal.classList.remove('active');
     }
 });
+
 
 // --- CART LOGIC ---
 const cartIcon = document.getElementById('cartIcon');
@@ -103,9 +180,6 @@ const addToCartModalBtn = document.querySelector('.modal-cta');
 
 // Load Cart from Storage
 let cart = JSON.parse(localStorage.getItem('ramenZooCart')) || [];
-if (cart.length > 0) {
-    renderCart(); // Render immediately if items exist
-}
 
 // Open/Close Drawer
 function toggleCart(show) {
@@ -126,12 +200,13 @@ cartIcon.addEventListener('click', (e) => {
 cartClose.addEventListener('click', () => toggleCart(false));
 cartOverlay.addEventListener('click', () => toggleCart(false));
 
+
 // Add to Cart Function
-function addToCart(product) {
-    cart.push(product);
+function addToCart(productSubset) {
+    cart.push(productSubset);
     renderCart();
-    toggleCart(true); // Open drawer which confirms addition
-    modal.classList.remove('active'); // Close modal
+    toggleCart(true);
+    modal.classList.remove('active');
 }
 
 // Render Cart UI
@@ -182,34 +257,71 @@ function renderCart() {
 
 // Handle "Add to Cart" from Modal
 addToCartModalBtn.addEventListener('click', () => {
-    const title = document.getElementById('modalTitle').innerText;
-    const priceText = document.getElementById('modalPrice').innerText;
-    const price = parseFloat(priceText.replace('$', ''));
-    const image = document.getElementById('modalImg').src;
+    if (!currentProduct) return;
 
-    // Get Selected Size
-    let size = 'M'; // Default
+    // Determine selected variant based on size
+    // 1. Find selected size string
     const selectedSizeBtn = document.querySelector('.sizes button.selected');
-    if (selectedSizeBtn) {
-        size = selectedSizeBtn.innerText;
+    let selectedSize = selectedSizeBtn ? selectedSizeBtn.innerText : null;
+
+    // 2. Find matching variant
+    let selectedVariant;
+
+    if (selectedSize) {
+        // Look for variant where an option value matches selectedSize
+        selectedVariant = currentProduct.variants.find(v => {
+            return v.selectedOptions.some(opt => opt.value === selectedSize);
+        });
+    } else {
+        // Fallback to first variant if no options or selection
+        selectedVariant = currentProduct.variants[0];
+        selectedSize = "One Size";
     }
 
-    const product = {
-        title,
-        price,
-        image,
-        size
+    if (!selectedVariant) {
+        alert("Sorry, that variant is unavailable.");
+        return;
+    }
+
+    const price = parseFloat(selectedVariant.price.amount);
+
+    const productSubset = {
+        title: currentProduct.title,
+        price: price,
+        image: currentProduct.images[0] ? currentProduct.images[0].src : '',
+        size: selectedSize,
+        variantId: selectedVariant.id // CRITICAL for checkout
     };
 
-    addToCart(product);
+    addToCart(productSubset);
 });
 
-// Size Selection Logic in Modal
-document.querySelectorAll('.sizes button').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        // Clear previous
-        document.querySelectorAll('.sizes button').forEach(b => b.classList.remove('selected'));
-        // Select clicked
-        e.target.classList.add('selected');
-    });
+
+// Checkout Button Logic
+document.querySelector('.checkout-btn').addEventListener('click', async () => {
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    const originalText = checkoutBtn.innerText;
+
+    checkoutBtn.innerText = "LOADING...";
+    checkoutBtn.disabled = true;
+
+    try {
+        const url = await createCheckout(cart);
+
+        if (url) {
+            window.location.href = url;
+        } else {
+            throw new Error("No checkout URL returned");
+        }
+    } catch (e) {
+        console.error(e);
+        checkoutBtn.innerText = originalText;
+        checkoutBtn.disabled = false;
+        alert("Failed to proceed to checkout.");
+    }
 });
+
+
+// INIT
+initShop();
+if (cart.length > 0) renderCart();
