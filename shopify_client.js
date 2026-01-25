@@ -19,7 +19,7 @@ const client = Client.buildClient({
 const MOCK_PRODUCTS = [
     {
         id: 'gid://shopify/Product/1',
-        title: 'Short sleeve Gyoza Panda t-shirt',
+        title: 'Gyoza Panda',
         description: 'Premium cotton tee featuring our exclusive Gyoza Panda artwork. Deliciously stylish.',
         images: [{ src: '/product_gyoza_panda.jpg' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
