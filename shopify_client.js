@@ -64,9 +64,13 @@ const MOCK_PRODUCTS = [
         title: 'Shoyu Sloth',
         description: 'Slow cooked to perfection. Take your time with the Shoyu Sloth tee.',
         images: [{ src: '/product_sloth.jpg' }],
-        options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL'] }],
+        options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
-            { id: 'gid://shopify/ProductVariant/6', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'M' }] }
+            { id: '56836282843519', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
+            { id: '56836282876287', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'M' }] },
+            { id: '56836282909055', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'L' }] },
+            { id: '56836282941823', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'XL' }] },
+            { id: '56836282974591', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: '2XL' }] }
         ]
     }
 ];
