@@ -72,6 +72,20 @@ const MOCK_PRODUCTS = [
             { id: '56836282941823', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'XL' }] },
             { id: '56836282974591', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: '2XL' }] }
         ]
+    },
+    {
+        id: 'gid://shopify/Product/5',
+        title: 'Tanuki Tunes',
+        description: 'Beats and treats. The Tanuki brings the rhythm of the street to your wardrobe.',
+        images: [{ src: '/product_tanuki.jpg' }],
+        options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
+        variants: [
+            { id: 'mock_tanuki_s', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
+            { id: 'mock_tanuki_m', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'M' }] },
+            { id: 'mock_tanuki_l', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'L' }] },
+            { id: 'mock_tanuki_xl', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'XL' }] },
+            { id: 'mock_tanuki_2xl', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: '2XL' }] }
+        ]
     }
 ];
 
