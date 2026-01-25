@@ -21,7 +21,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/1',
         title: 'Short sleeve Gyoza Panda t-shirt',
         description: 'Premium cotton tee featuring our exclusive Gyoza Panda artwork. Deliciously stylish.',
-        images: [{ src: './product_gyoza_panda.jpg' }],
+        images: [{ src: '/product_gyoza_panda.jpg' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
             { id: '56834124677503', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
@@ -35,7 +35,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/2',
         title: 'Tonkotsu Tiger',
         description: 'Bold flavor, bold style. The Tonkotsu Tiger represents the rich depth of our designs.',
-        images: [{ src: './product_tiger.jpg' }],
+        images: [{ src: '/product_tiger.jpg' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
             { id: '56835995631999', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
@@ -49,7 +49,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/3',
         title: 'Long Neck Noodle',
         description: 'Tall orders of flavor. The Long Neck Noodle tee is for those with elevated taste.',
-        images: [{ src: './product_long_neck.jpg' }],
+        images: [{ src: '/product_long_neck.jpg' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
             { id: '56836068934015', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
@@ -63,7 +63,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/3',
         title: 'Shoyu Sloth',
         description: 'Slow cooked to perfection. Take your time with the Shoyu Sloth tee.',
-        images: [{ src: './product_sloth.jpg' }],
+        images: [{ src: '/product_sloth.jpg' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL'] }],
         variants: [
             { id: 'gid://shopify/ProductVariant/6', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'M' }] }
@@ -72,7 +72,19 @@ const MOCK_PRODUCTS = [
 ];
 
 export async function fetchAllProducts() {
-    // Always return Mock Data for now as we don't have a token
+    // --- REAL SHOPIFY FETCH ---
+    // Uncomment this when you have a valid Token
+    /*
+    try {
+        const products = await client.product.fetchAll();
+        return products;
+    } catch (e) {
+         console.error("Shopify Fetch Error (likely 401 Unauthorized):", e);
+         return MOCK_PRODUCTS; // Fallback
+    }
+    */
+
+    // Default to Mock Data for Demo
     return MOCK_PRODUCTS;
 }
 
