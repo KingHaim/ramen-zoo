@@ -8,9 +8,12 @@
     --font-body: 'Inter', sans-serif;
 
     --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 32px;
-    --spacing-xl: 64px;
+    --spacing-md: 24px;
+    /* Increased from 16 */
+    --spacing-lg: 48px;
+    /* Increased from 32 */
+    --spacing-xl: 120px;
+    /* Increased from 64 for true negative space */
 }
 
 * {
@@ -43,7 +46,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-md) var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-lg);
+    /* Reduced horizontal padding slightly for tension */
     z-index: 100;
     color: var(--color-rice);
     transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
@@ -52,7 +56,7 @@ body {
 .site-header.scrolled {
     background-color: var(--color-sumi);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: var(--spacing-sm) var(--spacing-xl);
+    padding: var(--spacing-sm) var(--spacing-lg);
 }
 
 .logo img {
@@ -80,8 +84,10 @@ body {
     color: var(--color-rice);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+    font-size: 0.8rem;
+    /* Smaller, punchier */
+    letter-spacing: 2px;
+    /* Wider spacing */
     text-transform: uppercase;
     transition: opacity 0.2s;
 }
@@ -96,7 +102,10 @@ body {
     width: 100%;
     position: relative;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    /* Center vertically for drama */
+    justify-content: center;
+    /* Center horizontally */
     /* Text at bottom left like reference */
     padding: var(--spacing-xl);
     background-color: var(--color-sumi);
@@ -115,44 +124,54 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 600px;
-    margin-bottom: var(--spacing-xl);
+    max-width: 800px;
+    text-align: center;
+    /* Centered layout for "Anomaly" feel */
+    margin-bottom: 0;
 }
 
 .hero h1 {
     font-family: var(--font-display);
-    font-size: 4rem;
-    line-height: 1;
+    font-size: 5rem;
+    /* Bigger */
+    line-height: 0.9;
     color: var(--color-rice);
     text-transform: uppercase;
     margin-bottom: var(--spacing-md);
+    letter-spacing: -2px;
+    /* Tight for impact */
 }
 
 .hero p {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     color: var(--color-rice);
     opacity: 0.9;
     margin-bottom: var(--spacing-lg);
     font-weight: 300;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cta-button {
     display: inline-block;
     background-color: var(--color-rice);
     color: var(--color-sumi);
-    padding: 16px 32px;
+    padding: 16px 48px;
+    /* Wider button */
     text-decoration: none;
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    border: 2px solid var(--color-rice);
+    border: 1px solid var(--color-rice);
+    /* Thinner border */
     transition: all 0.3s ease;
 }
 
@@ -163,8 +182,10 @@ body {
 
 /* Mascot Menu */
 .mascot-menu {
-    padding: var(--spacing-xl);
-    max-width: 1200px;
+    padding: var(--spacing-xl) var(--spacing-md);
+    /* More vertical space */
+    max-width: 1400px;
+    /* Wider grid */
     margin: 0 auto;
 }
 
@@ -173,19 +194,20 @@ body {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: var(--spacing-xl);
-    border-bottom: 2px solid var(--color-sumi);
-    display: inline-block;
-    padding-bottom: var(--spacing-sm);
-    /* Centering trick */
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    border-bottom: none;
+    /* Removed underline for minimalism */
+    display: block;
+    position: static;
+    transform: none;
+    letter-spacing: 4px;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    /* Wider cards */
+    gap: var(--spacing-xl);
+    /* Big gap */
 }
 
 .product-card {
