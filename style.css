@@ -96,6 +96,123 @@ body {
     opacity: 0.7;
 }
 
+/* Header Actions & Mobile Toggle */
+.mobile-menu-toggle {
+    display: none;
+    /* Hidden on Desktop */
+    background: none;
+    border: none;
+    color: var(--color-rice);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-rice);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.cart-icon-svg {
+    display: none;
+    /* Hidden on Desktop */
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-sumi);
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-menu-overlay.active {
+    transform: translateX(0);
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    color: var(--color-rice);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.mobile-nav-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.mobile-link {
+    color: var(--color-rice);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.mobile-menu-overlay.active .mobile-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for links */
+.mobile-link:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.mobile-link:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.mobile-link:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.mobile-link:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.mobile-menu-footer {
+    padding: var(--spacing-md);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;
@@ -270,19 +387,46 @@ img.card-image {
 /* Media Queries */
 @media (max-width: 768px) {
     .site-header {
-        flex-direction: column;
-        gap: var(--spacing-sm);
+        flex-direction: row;
+        /* Force row for mobile header items */
+        justify-content: space-between;
         padding: var(--spacing-sm) var(--spacing-md);
+        height: 70px;
+        /* Fixed height for consistency */
     }
 
-    .site-header nav ul {
-        gap: var(--spacing-md);
-        font-size: 0.8rem;
+    .desktop-nav {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .logo {
+        position: absolute;
+        /* Center absolute */
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .logo img {
-        height: 100px;
-        /* Smaller logo on mobile */
+        height: 40px;
+        /* Consistent Mobile Height */
+    }
+
+    .site-header.scrolled .logo img {
+        height: 35px;
+        /* Slightly smaller on scroll */
+    }
+
+    /* Actions */
+    .cart-text {
+        display: none;
+    }
+
+    .cart-icon-svg {
+        display: block;
     }
 
     .hero h1 {
@@ -297,10 +441,34 @@ img.card-image {
         font-size: 1.5rem;
     }
 
+    /* Mobile Product Grid - 2 Columns */
     .grid {
-        grid-template-columns: 1fr;
-        /* Force single column on mobile */
-        gap: var(--spacing-xl);
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        /* Tight gap */
+    }
+
+    .product-card {
+        padding: 5px;
+        /* Minimal padding */
+        border: none;
+        /* Cleaner look */
+    }
+
+    .card-details h3 {
+        font-size: 0.9rem;
+        /* Smaller Font */
+        letter-spacing: 0.5px;
+    }
+
+    .card-details p {
+        font-size: 0.85rem;
+    }
+
+    .add-to-cart {
+        padding: 8px 0;
+        font-size: 0.8rem;
+        width: 100%;
     }
 }
 

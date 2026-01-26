@@ -322,6 +322,34 @@ document.querySelector('.checkout-btn').addEventListener('click', async () => {
 });
 
 
+// --- MOBILE MENU ---
+const mobileMenuBtn = document.getElementById('mobileMenuToggle');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileMenuCloseBtn = document.getElementById('mobileMenuClose');
+const mobileLinks = document.querySelectorAll('.mobile-link');
+
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+}
+
+function closeMobileMenu() {
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+if (mobileMenuCloseBtn) {
+    mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
+}
+
+mobileLinks.forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+});
+
 // INIT
 initShop();
 if (cart.length > 0) renderCart();
