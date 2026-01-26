@@ -229,7 +229,7 @@ body {
     /* Fallback */
     background-size: cover;
     background-position: center;
-    background-image: url('./hero_bg_giraffe.webp');
+    background-image: url('/hero_bg_giraffe.webp');
     overflow: hidden;
 }
 
@@ -520,7 +520,7 @@ h3 {
 /* Brand Story */
 .brand-story {
     padding: var(--spacing-xl) var(--spacing-md);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./story_bg.webp');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/story_bg.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
