@@ -21,7 +21,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/1',
         title: 'Gyoza Panda',
         description: 'Premium cotton tee featuring our exclusive Gyoza Panda artwork. Deliciously stylish.',
-        images: [{ src: '/product_gyoza_panda.jpg' }],
+        images: [{ src: '/product_gyoza_panda.webp' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
             { id: '56834124677503', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
@@ -35,7 +35,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/2',
         title: 'Tonkotsu Tiger',
         description: 'Bold flavor, bold style. The Tonkotsu Tiger represents the rich depth of our designs.',
-        images: [{ src: '/product_tiger.jpg' }],
+        images: [{ src: '/product_tiger.webp' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
             { id: '56835995631999', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
@@ -49,7 +49,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/3',
         title: 'Long Neck Noodle',
         description: 'Tall orders of flavor. The Long Neck Noodle tee is for those with elevated taste.',
-        images: [{ src: '/product_long_neck.jpg' }],
+        images: [{ src: '/product_long_neck.webp' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
             { id: '56836068934015', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
@@ -63,7 +63,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/4',
         title: 'Shoyu Sloth',
         description: 'Slow cooked to perfection. Take your time with the Shoyu Sloth tee.',
-        images: [{ src: '/product_sloth.jpg' }],
+        images: [{ src: '/product_sloth.webp' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
             { id: '56836282843519', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
@@ -77,7 +77,7 @@ const MOCK_PRODUCTS = [
         id: 'gid://shopify/Product/5',
         title: 'Tanuki Tunes',
         description: 'Beats and treats. The Tanuki brings the rhythm of the street to your wardrobe.',
-        images: [{ src: '/product_tanuki.jpg' }],
+        images: [{ src: '/product_tanuki.webp' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
             { id: 'mock_tanuki_s', price: { amount: '35.00', currencyCode: 'EUR' }, available: false, selectedOptions: [{ name: 'Size', value: 'S' }] },

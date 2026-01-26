@@ -54,7 +54,7 @@ function renderProducts(products) {
         card.classList.add('product-card');
 
         // Use first image or placeholder
-        const imageSrc = product.images[0] ? product.images[0].src : '/logo.png';
+        const imageSrc = product.images[0] ? product.images[0].src : '/logo.webp';
         // Use min price
         const price = product.variants[0].price.amount;
         const currency = product.variants[0].price.currencyCode; // usually USD
@@ -110,7 +110,7 @@ function openModal(product) {
     // Populate Modal
     modalTitle.innerText = product.title;
 
-    const imageSrc = product.images[0] ? product.images[0].src : '/logo.png';
+    const imageSrc = product.images[0] ? product.images[0].src : '/logo.webp';
     modalImg.src = imageSrc;
 
     const price = product.variants[0].price.amount;
