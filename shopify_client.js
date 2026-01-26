@@ -80,11 +80,11 @@ const MOCK_PRODUCTS = [
         images: [{ src: '/product_tanuki.jpg' }],
         options: [{ name: 'Size', values: ['S', 'M', 'L', 'XL', '2XL'] }],
         variants: [
-            { id: 'mock_tanuki_s', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'S' }] },
-            { id: 'mock_tanuki_m', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'M' }] },
-            { id: 'mock_tanuki_l', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'L' }] },
-            { id: 'mock_tanuki_xl', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: 'XL' }] },
-            { id: 'mock_tanuki_2xl', price: { amount: '35.00', currencyCode: 'EUR' }, selectedOptions: [{ name: 'Size', value: '2XL' }] }
+            { id: 'mock_tanuki_s', price: { amount: '35.00', currencyCode: 'EUR' }, available: false, selectedOptions: [{ name: 'Size', value: 'S' }] },
+            { id: 'mock_tanuki_m', price: { amount: '35.00', currencyCode: 'EUR' }, available: false, selectedOptions: [{ name: 'Size', value: 'M' }] },
+            { id: 'mock_tanuki_l', price: { amount: '35.00', currencyCode: 'EUR' }, available: false, selectedOptions: [{ name: 'Size', value: 'L' }] },
+            { id: 'mock_tanuki_xl', price: { amount: '35.00', currencyCode: 'EUR' }, available: false, selectedOptions: [{ name: 'Size', value: 'XL' }] },
+            { id: 'mock_tanuki_2xl', price: { amount: '35.00', currencyCode: 'EUR' }, available: false, selectedOptions: [{ name: 'Size', value: '2XL' }] }
         ]
     }
 ];

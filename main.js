@@ -278,8 +278,8 @@ addToCartModalBtn.addEventListener('click', () => {
         selectedSize = "One Size";
     }
 
-    if (!selectedVariant) {
-        alert("Sorry, that variant is unavailable.");
+    if (!selectedVariant || (selectedVariant.available === false)) {
+        alert("Sorry, this item is currently out of stock.");
         return;
     }
 
