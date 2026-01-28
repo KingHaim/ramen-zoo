@@ -12,7 +12,7 @@ import Client from 'shopify-buy';
 // Initialize Client
 const client = Client.buildClient({
     domain: 'ramen-zoo.myshopify.com',
-    storefrontAccessToken: 'b66c6329ce5df0f43419604189e80eaa'
+    storefrontAccessToken: 'de6a049a8fdddceb1e46e935f2e722ad'
 });
 
 // --- MOCK DATA ---
@@ -91,19 +91,14 @@ const MOCK_PRODUCTS = [
 
 export async function fetchAllProducts() {
     // --- REAL SHOPIFY FETCH ---
-    // Uncomment this when you have a valid Token
-    /*
     try {
         const products = await client.product.fetchAll();
+        console.log("Fetched real products from Shopify:", products.length);
         return products;
     } catch (e) {
-         console.error("Shopify Fetch Error (likely 401 Unauthorized):", e);
-         return MOCK_PRODUCTS; // Fallback
+         console.error("Shopify Fetch Error:", e);
+         return MOCK_PRODUCTS; // Fallback to mock data if fetch fails
     }
-    */
-
-    // Default to Mock Data for Demo
-    return MOCK_PRODUCTS;
 }
 
 export async function createCheckout(cartItems) {
